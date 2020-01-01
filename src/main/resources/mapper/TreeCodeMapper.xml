@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hero.ms.service.tree.mapper.TreeCodeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hero.ms.service.tree.entity.TreeCode">
+        <id column="CODE_ID" property="codeId"/>
+        <result column="CODE_NAME" property="codeName"/>
+        <result column="CODE_VALUE" property="codeValue"/>
+        <result column="SORT_NO" property="sortNo"/>
+        <result column="PARENT_ID" property="parentId"/>
+        <result column="CODE_TYPE" property="codeType"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_NAME" property="createName"/>
+        <result column="UPDATE_USER" property="updateUser"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="UPDATE_NAME" property="updateName"/>
+        <result column="PRO_ID" property="proId"/>
+        <result column="BUS_PRO_ID" property="busProId"/>
+        <result column="ORG_ID" property="orgId"/>
+        <result column="TENANT_ID" property="tenantId"/>
+        <result column="TREE_PATH" property="treePath"/>
+        <result column="TREE_NAME_PATH" property="treeNamePath"/>
+        <result column="IS_DELETE" property="isDelete"/>
+        <result column="IS_EDIT" property="isEdit"/>
+        <result column="LEVEL_NO" property="levelNo"/>
+        <result column="IS_LEAF" property="isLeaf"/>
+        <result column="VAILD_START_TIME" property="vaildStartTime"/>
+        <result column="VAILD_END_TIME" property="vaildEndTime"/>
+        <result column="LETTER_CODE" property="letterCode"/>
+        <result column="CODE_KEYWORD" property="codeKeyword"/>
+    </resultMap>
+
+    <!-- 通用查询条件列 -->
+    <sql id="Base_Where_List">
+        WHERE 1 = 1
+        <if test="codeId!=null and codeId!=''">
+            AND CODE_ID = #{codeId}
+        </if>
+        <if test="codeName!=null and codeName!=''">
+            AND CODE_NAME = #{codeName}
+        </if>
+        <if test="codeValue!=null and codeValue!=''">
+            AND CODE_VALUE = #{codeValue}
+        </if>
+        <if test="sortNo!=null and sortNo!=''">
+            AND SORT_NO = #{sortNo}
+        </if>
+        <if test="parentId!=null and parentId!=''">
+            AND PARENT_ID = #{parentId}
+        </if>
+        <if test="codeType!=null and codeType!=''">
+            AND CODE_TYPE = #{codeType}
+        </if>
+        <if test="createUser!=null and createUser!=''">
+            AND CREATE_USER = #{createUser}
+        </if>
+        <if test="createTime!=null and createTime!=''">
+            AND CREATE_TIME = #{createTime}
+        </if>
+        <if test="createName!=null and createName!=''">
+            AND CREATE_NAME = #{createName}
+        </if>
+        <if test="updateUser!=null and updateUser!=''">
+            AND UPDATE_USER = #{updateUser}
+        </if>
+        <if test="updateTime!=null and updateTime!=''">
+            AND UPDATE_TIME = #{updateTime}
+        </if>
+        <if test="updateName!=null and updateName!=''">
+            AND UPDATE_NAME = #{updateName}
+        </if>
+
+        <if test="proId!=null and proId!=''">
+            AND PRO_ID = #{proId}
+        </if>
+        <if test="orgId!=null and orgId!=''">
+            AND ORG_ID = #{orgId}
+        </if>
+        <if test="tenantId!=null and tenantId!=''">
+            AND TENANT_ID = #{tenantId}
+        </if>
+        <if test="treePath!=null and treePath!=''">
+            AND TREE_PATH = #{treePath}
+        </if>
+        <if test="isEdit!=null and isEdit!=''">
+            AND IS_EDIT = #{isEdit}
+        </if>
+        <if test="treeNamePath!=null and treeNamePath!=''">
+            AND TREE_NAME_PATH = #{treeNamePath}
+        </if>
+        <if test="levelNo!=null and levelNo!=''">
+            AND LEVEL_NO = #{levelNo}
+        </if>
+        <if test="isLeaf!=null and isLeaf!=''">
+            AND IS_LEAF = #{isLeaf}
+        </if>
+        <if test="letterCode!=null and letterCode!=''">
+            AND LETTER_CODE = #{letterCode}
+        </if>
+        <if test="codeKeyword!=null and codeKeyword!=''">
+            AND CODE_KEYWORD = #{codeKeyword}
+        </if>
+        <if test="isDelete!=null and isDelete!=''">
+            AND IS_DELETE = #{isDelete}
+        </if>
+    </sql>
+
+    <!-- 通用数量查询 -->
+    <select id="baseCountQuery" resultType="int">
+        SELECT count(*)
+        FROM tbl_tynl_tree_code
+        <include refid="Base_Where_List"/>
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT *
+        FROM tbl_tynl_tree_code
+        WHERE IS_DELETE = 0
+        <if test="codeType!=null and codeType!=''">
+            AND CODE_TYPE = #{codeType}
+        </if>
+        <if test="proId!=null and proId!=''">
+            AND PRO_ID = #{proId}
+        </if>
+        ORDER BY SORT_NO
+    </select>
+
+    <!--查询父节点-->
+    <select id="findRoot" resultMap="BaseResultMap">
+        SELECT *
+        FROM tbl_tynl_tree_code
+        WHERE IS_DELETE = 0
+        <if test="codeType!=null and codeType!=''">
+            AND CODE_TYPE = #{codeType}
+        </if>
+        <if test="proId!=null and proId!=''">
+            AND PRO_ID = #{proId}
+        </if>
+        AND PARENT_ID IS NULL
+        ORDER BY SORT_NO
+	</select>
+
+    <!--查询子节点-->
+    <select id="findChildren" resultMap="BaseResultMap">
+        SELECT *
+        FROM tbl_tynl_tree_code
+        WHERE IS_DELETE = 0
+        <if test="codeType!=null and codeType!=''">
+            AND CODE_TYPE = #{codeType}
+        </if>
+        <if test="proId!=null and proId!=''">
+            AND PRO_ID = #{proId}
+        </if>
+        <if test="parentId!=null and parentId!=''">
+            AND PARENT_ID = #{parentId}
+        </if>
+        ORDER BY SORT_NO
+    </select>
+
+    <!--模糊查询-->
+    <select id="findByWord" resultMap="BaseResultMap">
+		SELECT * FROM tbl_tynl_tree_code WHERE CODE_NAME like concat('%', #{codeName}, '%') GROUP BY CODE_NAME
+	</select>
+
+</mapper>

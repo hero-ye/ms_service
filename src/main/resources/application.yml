@@ -1,0 +1,28 @@
+server:
+  port: 7011
+  servlet:
+    context-path: /ms/service
+
+spring:
+  application:
+    name: ms-service #指定服务名称
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/ms_ccc?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6011/eureka/
+  instance:
+    prefer-ip-address: true
+
+
+
+
+
