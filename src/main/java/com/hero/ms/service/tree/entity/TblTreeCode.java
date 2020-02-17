@@ -1,11 +1,12 @@
 package com.hero.ms.service.tree.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,13 +20,14 @@ import java.util.List;
  * @since 2019-12-21
  */
 @Data
-@TableName("tbl_tynl_tree_code")
-public class TreeCode implements Serializable {
+@Entity
+@TableName("tbl_tree_code")
+public class TblTreeCode implements Serializable {
 
     /**
      * 主键ID
      */
-    @TableId
+    @Id
     private String codeId;
 
     /**
@@ -89,11 +91,6 @@ public class TreeCode implements Serializable {
     private String proId;
 
     /**
-     * 业务省份编码
-     */
-    private String busProId;
-
-    /**
      * 部门编码
      */
     private String orgId;
@@ -113,7 +110,7 @@ public class TreeCode implements Serializable {
      */
     private String treeNamePath;
 
-    @TableLogic
+//    @TableLogic
     private byte isDelete;
 
     /**
@@ -151,42 +148,10 @@ public class TreeCode implements Serializable {
      */
     private String codeKeyword;
 
-    @TableField(exist = false)
-    private List<TreeCode> children;
+    @OneToMany
+    @Transient
+    private List<TblTreeCode> children;
 
-    public TreeCode() {
-    }
-
-
-    @Override
-    public String toString() {
-        return "TreeCode{" +
-                "codeId=" + codeId +
-        ", codeName=" + codeName +
-        ", codeValue=" + codeValue +
-        ", sortNo=" + sortNo +
-        ", parentId=" + parentId +
-        ", codeType=" + codeType +
-        ", createUser=" + createUser +
-        ", createTime=" + createTime +
-        ", createName=" + createName +
-        ", updateUser=" + updateUser +
-        ", updateTime=" + updateTime +
-        ", updateName=" + updateName +
-        ", proId=" + proId +
-        ", busProId=" + busProId +
-        ", orgId=" + orgId +
-        ", tenantId=" + tenantId +
-        ", treePath=" + treePath +
-                ", isDelete=" + isDelete +
-        ", isEdit=" + isEdit +
-        ", treeNamePath=" + treeNamePath +
-        ", levelNo=" + levelNo +
-        ", isLeaf=" + isLeaf +
-                ", vaildStartTime=" + vaildStartTime +
-                ", vaildEndTime=" + vaildEndTime +
-        ", letterCode=" + letterCode +
-                ", codeKeyword=" + codeKeyword +
-        "}";
+    public TblTreeCode() {
     }
 }

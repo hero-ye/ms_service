@@ -1,6 +1,6 @@
 package com.hero.ms.service.tree.utils;
 
-import com.hero.ms.service.tree.entity.TreeCode;
+import com.hero.ms.service.tree.entity.TblTreeCode;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
@@ -27,7 +27,7 @@ public class TreeNodes {
     public TreeNodes() {
     }
 
-    public TreeNodes(TreeCode n) {
+    public TreeNodes(TblTreeCode n) {
         this.setId(n.getCodeId());
         this.setName(n.getCodeName());
         this.setIsParent(n.getIsLeaf() == 0);
@@ -39,7 +39,6 @@ public class TreeNodes {
         //attributes.setParentId(n.getParentId());
         attributes.setProId(n.getProId());
         attributes.setOrgId(n.getOrgId());
-        attributes.setBusProId(n.getBusProId());
         attributes.setTenantId(n.getTenantId());
         attributes.setTreePath(n.getTreePath());
         attributes.setIsDel(n.getIsDelete());

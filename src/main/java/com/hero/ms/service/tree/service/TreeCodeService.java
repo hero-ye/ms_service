@@ -1,6 +1,6 @@
 package com.hero.ms.service.tree.service;
 
-import com.hero.ms.service.tree.entity.TreeCode;
+import com.hero.ms.service.tree.entity.TblTreeCode;
 
 import java.util.List;
 
@@ -11,12 +11,28 @@ import java.util.List;
  */
 public interface TreeCodeService {
 
-    List<TreeCode> findAll(String proId, String codeType);
+    /**
+     * 查询根节点
+     * @param proId
+     * @param codeType
+     * @return
+     */
+    List<TblTreeCode> findRoot(String proId, String codeType);
 
-    List<TreeCode> findRoot(String proId, String codeType);
+    /**
+     * 查询子节点
+     * @param proId
+     * @param codeType
+     * @param parentId
+     * @return
+     */
+    List<TblTreeCode> findChildren(String proId, String codeType, String parentId);
 
-    List<TreeCode> findChildren(String proId, String codeType, String parentId);
-
-    List<TreeCode> findByWord(String codeName);
+    /**
+     * 根据codeName模糊查询
+     * @param codeName
+     * @return
+     */
+    List<TblTreeCode> findByWord(String codeName);
 
 }

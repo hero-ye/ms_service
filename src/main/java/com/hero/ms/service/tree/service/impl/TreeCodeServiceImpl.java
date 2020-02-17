@@ -1,6 +1,6 @@
 package com.hero.ms.service.tree.service.impl;
 
-import com.hero.ms.service.tree.entity.TreeCode;
+import com.hero.ms.service.tree.entity.TblTreeCode;
 import com.hero.ms.service.tree.mapper.TreeCodeMapper;
 import com.hero.ms.service.tree.service.TreeCodeService;
 import org.springframework.stereotype.Service;
@@ -20,22 +20,17 @@ public class TreeCodeServiceImpl implements TreeCodeService {
     private TreeCodeMapper treeCodeMapper;
 
     @Override
-    public List<TreeCode> findAll(String codeType, String proId) {
-        return treeCodeMapper.findAll(codeType, proId);
+    public List<TblTreeCode> findRoot(String proId, String codeType) {
+        return treeCodeMapper.findByProIdAndCodeTypeAndParentIdIsNullOrderBySortNo(proId, codeType);
     }
 
     @Override
-    public List<TreeCode> findRoot(String codeType, String proId) {
-        return treeCodeMapper.findRoot(codeType, proId);
+    public List<TblTreeCode> findChildren(String proId, String codeType, String parentId) {
+        return treeCodeMapper.findByProIdAndCodeTypeAndParentIdOrderBySortNo(proId, codeType, parentId);
     }
 
     @Override
-    public List<TreeCode> findChildren(String codeType, String proId, String parentId) {
-        return treeCodeMapper.findChildren(codeType, proId, parentId);
-    }
-
-    @Override
-    public List<TreeCode> findByWord(String codeName) {
-        return treeCodeMapper.findByWord(codeName);
+    public List<TblTreeCode> findByWord(String codeName) {
+        return treeCodeMapper.findByCodeName(codeName);
     }
 }
