@@ -3,7 +3,7 @@ package com.hero.ms.service.tree.rest;
 
 import com.hero.ms.common.pojo.ServiceResult;
 import com.hero.ms.common.pojo.StatusCode;
-import com.hero.ms.service.tree.entity.ProType;
+import com.hero.ms.service.tree.entity.TblProCode;
 import com.hero.ms.service.tree.service.impl.ProTypeServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +26,7 @@ public class ProTypeRest {
 
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public ServiceResult findAll(){
-        List<ProType> proList = proTypeService.findAll();
+        List<TblProCode> proList = proTypeService.findAll();
 
         if (proList.isEmpty()) {
             return new ServiceResult(false, StatusCode.DEFAULT.getKey(), "暂无数据！");

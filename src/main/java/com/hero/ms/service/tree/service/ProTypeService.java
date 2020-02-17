@@ -1,6 +1,6 @@
 package com.hero.ms.service.tree.service;
 
-import com.hero.ms.service.tree.entity.ProType;
+import com.hero.ms.service.tree.entity.TblProCode;
 
 import java.util.List;
 
@@ -9,7 +9,10 @@ import java.util.List;
  * @Date 2019/6/8 22:12
  */
 public interface ProTypeService {
-    //查询所有
-    List<ProType> findAll();
+    /**
+     * 查询所有
+     * @return
+     */
+    List<TblProCode> findAll();
 
 }

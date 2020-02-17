@@ -1,6 +1,6 @@
 package com.hero.ms.service.tree.service.impl;
 
-import com.hero.ms.service.tree.entity.ProType;
+import com.hero.ms.service.tree.entity.TblProCode;
 import com.hero.ms.service.tree.mapper.ProTypeMapper;
 import com.hero.ms.service.tree.service.ProTypeService;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ProTypeServiceImpl implements ProTypeService {
     private ProTypeMapper proTypeMapper;
 
     @Override
-    public List<ProType> findAll() {
-        return proTypeMapper.findAll();
+    public List<TblProCode> findAll() {
+        return proTypeMapper.findByOrderBySortNo();
     }
 }
