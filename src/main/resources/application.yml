@@ -11,12 +11,12 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-  jpa:
-    show-sql: true
+#  jpa:
+#    show-sql: true
 
 
-mybatis-plus:
-  mapper-locations: classpath:mapper/*Mapper.xml
+#mybatis-plus:
+#  mapper-locations: classpath:mapper/*Mapper.xml
 
 eureka:
   client:
