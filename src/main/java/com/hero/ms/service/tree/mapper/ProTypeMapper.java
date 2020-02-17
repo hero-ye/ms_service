@@ -1,7 +1,7 @@
 package com.hero.ms.service.tree.mapper;
 
-import com.hero.ms.service.tree.entity.ProType;
-import org.apache.ibatis.annotations.Mapper;
+import com.hero.ms.service.tree.entity.TblProCode;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
@@ -9,8 +9,7 @@ import java.util.List;
  * @Author yejx
  * @Date 2019/6/8 22:00
  */
-@Mapper
-public interface ProTypeMapper {
+public interface ProTypeMapper extends JpaRepository<TblProCode, String> {
     //查询所有
-    List<ProType> findAll();
+    List<TblProCode> findByOrderBySortNo();
 }
